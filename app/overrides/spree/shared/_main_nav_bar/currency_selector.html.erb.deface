@@ -4,7 +4,7 @@
     <%= form_tag set_currency_path(format: :html), class: 'navbar-form' do %>
       <div class="form-group">
         <label for="currency" class="sr-only"><%= Spree.t(:currency) %></label>
-        <%= select_tag(:currency, options_for_select(supported_currencies, current_currency), class: 'form-control', data: { href: set_currency_path(format: :json) }) %>
+        <%= select_tag(:currency, options_for_select(supported_countries.values.map{|o|[o[:display_label],o[:key]]}, country_from_currency), class: 'form-control', data: { href: set_currency_path(format: :json) }) %>
         <noscript><%= submit_tag %></noscript>
       </div>
     <% end %>
