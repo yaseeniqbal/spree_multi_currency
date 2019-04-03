@@ -28,5 +28,9 @@ module Spree
     def country_from_currency
       supported_countries.with_indifferent_access.select{|k,h| h["currency_name"] == current_currency}.first.first
     end
+
+    def from_currency(key)
+      supported_countries.with_indifferent_access.select{|k,h| h["currency_name"] == "AED"}.first[-1][key]
+    end
   end
 end
