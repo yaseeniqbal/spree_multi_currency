@@ -11,7 +11,7 @@ module Spree
     def supported_countries
       {
           uae: {
-              display_label: 'UAE (د.إ)',
+              display_label: 'United Arab Emirates',
               country_name: 'UAE',
               currency_name: 'AED',
               key: 'uae'
@@ -30,7 +30,7 @@ module Spree
     end
 
     def from_currency(key)
-      supported_countries.with_indifferent_access.select{|k,h| h["currency_name"] == "AED"}.first[-1][key]
+      supported_countries.with_indifferent_access.select{|k,h| h["currency_name"] == current_currency}.first[-1][key]
     end
   end
 end
