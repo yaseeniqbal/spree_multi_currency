@@ -12,7 +12,7 @@ module Spree
         format.json { render json: !@currency.nil? }
         format.html do
           # We want to go back to where we came from!
-          redirect_back_or_default(root_path)
+          redirect_back(fallback_location: root_path)
         end
       end
     end
