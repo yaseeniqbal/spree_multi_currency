@@ -1,4 +1,4 @@
-Spree::Core::ControllerHelpers::Order.class_eval do
+module Spree::Core::ControllerHelpers::OrderDecorator
   def current_currency
     # ensure session currency is supported
     #
