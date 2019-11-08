@@ -14,6 +14,7 @@
     <div class="form-group">
       <div class="checkbox">
         <label>
+          <%= hidden_field_tag :allow_currency_change, 0 %>
           <%= check_box_tag(:allow_currency_change, 1, Spree::MultiCurrencyConfiguration::Config.allow_currency_change) %>
           <%= Spree.t('allow_currency_change.short') %>
         </label>
@@ -24,6 +25,7 @@
     <div class="form-group">
       <div class="checkbox">
         <label>
+          <%= hidden_field_tag :show_currency_selector, 0 %>
           <%= check_box_tag(:show_currency_selector, 1, Spree::MultiCurrencyConfiguration::Config.show_currency_selector) %>
           <%= Spree.t('show_currency_selector.short') %>
         </label>

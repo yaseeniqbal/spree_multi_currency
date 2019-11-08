@@ -9,3 +9,5 @@ module Spree::Core::ControllerHelpers::OrderDecorator
     end
   end
 end
+
+::Spree::Core::ControllerHelpers::Order.prepend(::Spree::Core::ControllerHelpers::OrderDecorator)
