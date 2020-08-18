@@ -1,5 +1,4 @@
 <% panel_class ||= 'panel-default' %>
-
 <div class="col-md-6">
 	<div class="panel <%= panel_class %>">
 	  <div class="panel-heading">
@@ -17,11 +16,22 @@
 		    <% code  = currency.iso_code %>
 		    <% price = variant.price_in(code) %>
 		    <div class="form-group">
-		      <%= label_tag "vp[#{variant.id}][#{code}]", code, class: 'control-label col-md-2' %>
-		      <div class="col-md-10">
+		      <%= label_tag "vp[#{variant.id}][#{code}]", code, class: 'control-label col-md-6' %>
+		      <div class="col-md-6">
 			      <%= text_field_tag "vp[#{variant.id}][#{code}]", (price && price.price ? price.display_amount.money : ''), class: 'form-control' %>
 			     </div>
 		    </div>
+		    <% Spree::Price.tags.each do |key,value| %>
+		    	<% class_price = variant.price_in_classification(code, key) %>
+		    	<%# next if ( currency == "USD" && !EURO_CLASSIFICATION_PRICES.include?(key)) %>
+		    	<%# next if ( currency == "HUF" && EURO_CLASSIFICATION_PRICES.include?(key)) %>
+			    <div class="form-group">
+			      <%= label_tag "cp[#{variant.id}][#{code}][#{key}]", CLASSIFICATION_LABEL[key] , class: 'control-label col-md-6' %>
+			      <div class="col-md-6">
+				      <%= text_field_tag "cp[#{variant.id}][#{code}][#{key}]", (class_price && class_price.price ? class_price.display_amount.money : ''), class: 'form-control' %>
+				     </div>
+			    </div>
+			  <% end %>
 		  <% end %>
 	  </div>
 	</div>
