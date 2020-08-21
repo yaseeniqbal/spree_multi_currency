@@ -1,10 +1,10 @@
 @import "spree/backend";
 @import "spree/backend/global/variables";
-
+@import "spree/backend/classification-prices";
 .panel-primary {
   .panel-heading {
     .text-muted {
-      color: lighten($brand-primary, 30%);
+      color: lighten(#fff, 30%);
     }
   }
 }

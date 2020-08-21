@@ -1,38 +1,45 @@
 <% panel_class ||= 'panel-default' %>
-<div class="col-md-6">
-	<div class="panel <%= panel_class %>">
-	  <div class="panel-heading">
-	  	<h3 class="panel-title">
-	  		<span class="sku"><%= variant.sku %></span>
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel <%= panel_class %> accordion" id="accordionEx-<%= variant.id %>" role="tablist-<%= variant.id %>" aria-multiselectable="true">
+      <div class="panel-heading" role="tab-<%= variant.id %>" id="headingOne1-<%= variant.id %>">
+        <a class="<%= 'collapsed' if var_index != 0 %>" data-toggle="collapse" data-parent="#accordionEx-<%= variant.id %>" href="#collapseOne1-<%= variant.id %>" aria-expanded="true"
+        aria-controls="collapseOne1-<%= variant.id %>">
+          <div class="panel-title">
+            <div class="sku"><i class="custom-plus-icon rotate-icon"></i><%= variant.sku %></div>
+            <span class="text-muted pull-right">
+              <%= variant.is_master? ? Spree.t(:master) : variant.options_text.blank? ? Spree.t(:variant) : variant.options_text %>
+            </span>
+          </div>
+        </a>
+      </div>
 
-	  		<span class="text-muted pull-right">
-	  			<%= variant.is_master? ? Spree.t(:master) : variant.options_text.blank? ? Spree.t(:variant) : variant.options_text %>
-	  		</span>
-	  	</h3>
-	  </div>
-
-	  <div class="panel-body no-padding-bottom">
-		  <% supported_currencies.each do |currency| %>
-		    <% code  = currency.iso_code %>
-		    <% price = variant.price_in(code) %>
-		    <div class="form-group">
-		      <%= label_tag "vp[#{variant.id}][#{code}]", code, class: 'control-label col-md-6' %>
-		      <div class="col-md-6">
-			      <%= text_field_tag "vp[#{variant.id}][#{code}]", (price && price.price ? price.display_amount.money : ''), class: 'form-control' %>
-			     </div>
-		    </div>
-		    <% Spree::Price.tags.each do |key,value| %>
-		    	<% class_price = variant.price_in_classification(code, key) %>
-		    	<%# next if ( currency == "USD" && !EURO_CLASSIFICATION_PRICES.include?(key)) %>
-		    	<%# next if ( currency == "HUF" && EURO_CLASSIFICATION_PRICES.include?(key)) %>
-			    <div class="form-group">
-			      <%= label_tag "cp[#{variant.id}][#{code}][#{key}]", CLASSIFICATION_LABEL[key] , class: 'control-label col-md-6' %>
-			      <div class="col-md-6">
-				      <%= text_field_tag "cp[#{variant.id}][#{code}][#{key}]", (class_price && class_price.price ? class_price.display_amount.money : ''), class: 'form-control' %>
-				     </div>
-			    </div>
-			  <% end %>
-		  <% end %>
-	  </div>
-	</div>
+      <div class="panel-body no-padding-bottom">
+        <% supported_currencies.each do |currency| %>
+          <div class="col-md-3 currency-column collapse <%= 'show' if var_index == 0 %>" id="collapseOne1-<%= variant.id %>" role="tabpanel-<%= variant.id %>" aria-labelledby="headingOne1-<%= variant.id %>"
+          data-parent="#accordionEx-<%= variant.id %>">
+            <% code  = currency.iso_code %>
+            <% price = variant.price_in(code) %>
+            <div class="form-group">
+            <%= label_tag "vp[#{variant.id}][#{code}]", code, class: 'control-label ' %>
+            <div class="">
+              <%= text_field_tag "vp[#{variant.id}][#{code}]", (price && price.price ? price.display_amount.money : ''), class: 'form-control' %>
+              </div>
+            </div>
+            <% Spree::Price.tags.each do |key,value| %>
+              <% class_price = variant.price_in_classification(code, key) %>
+              <%# next if ( currency == "USD" && !EURO_CLASSIFICATION_PRICES.include?(key)) %>
+              <%# next if ( currency == "HUF" && EURO_CLASSIFICATION_PRICES.include?(key)) %>
+              <div class="form-group">
+              <%= label_tag "cp[#{variant.id}][#{code}][#{key}]", CLASSIFICATION_LABEL[key] , class: 'control-label' %>
+              <div class="">
+                <%= text_field_tag "cp[#{variant.id}][#{code}][#{key}]", (class_price && class_price.price ? class_price.display_amount.money : ''), class: 'form-control' %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
