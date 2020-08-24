@@ -1,0 +1,40 @@
+/* spree multi currency extension css */
+.search-icon{
+  top: -29px;
+  left: 10px;
+}
+.search-placeholder{
+  padding: 0.375rem 2.25rem;
+}
+.action-money{
+  padding: 0.5rem 1rem;
+}
+.panel-title{
+  font-size: 16px;
+  overflow-wrap: break-word;
+  color: #212529;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+.panel-body{
+  display: flex;
+}
+.currency-column{
+  padding-left: 0px;
+}
+.custom-plus-icon:before {
+  content: "+";
+}
+.accordion .panel-heading a:not(.collapsed) .rotate-icon::before {
+  content: "-";
+}
+.variant-link:hover, .variant-link:active, .variant-link:focus{
+  text-decoration: none;
+}
+.rotate-icon{
+  background-color: #36729f;
+  border-color: #36729f;
+  padding: 2px 8px;
+  color: white;
+  margin-right: 6px;
+}
