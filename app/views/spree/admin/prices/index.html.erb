@@ -12,7 +12,7 @@
 
   <div id="variant-prices">
     <%#= render 'variant_prices', variant: @product.master, panel_class: 'panel-primary' %>
-    <% @product.variants.each_with_index do |variant, index| %>
+    <%@product.variants_including_master.each_with_index do |variant, index| %>
 
       <%= render 'variant_prices', variant: variant, var_index: index %>
     <% end %>
